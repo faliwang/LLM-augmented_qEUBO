@@ -324,7 +324,7 @@ def get_new_suggested_query(
     elif algo == "analytic_eubo":
         acquisition_function = ExpectedUtilityOfBestOption(model=model)
     elif algo == "qeubo":
-        sampler = SobolQMCNormalSampler(sample_shape=64)
+        sampler = SobolQMCNormalSampler(sample_shape=torch.size([64]))
         acquisition_function = qExpectedUtilityOfBestOption(
             model=model, sampler=sampler
         )
@@ -335,7 +335,7 @@ def get_new_suggested_query(
             bounds=standard_bounds,
         )
     elif algo == "qei":
-        sampler = SobolQMCNormalSampler(sample_shape=64)
+        sampler = SobolQMCNormalSampler(sample_shape=torch.size([64]))
         if model_type == "variational_preferential_gp":
             X_baseline = model.queries.clone()
             X_baseline = X_baseline.view(
@@ -350,7 +350,7 @@ def get_new_suggested_query(
             sampler=sampler,
         )
     elif algo == "qnei":
-        sampler = SobolQMCNormalSampler(sample_shape=64)
+        sampler = SobolQMCNormalSampler(sample_shape=torch.size([64]))
         if model_type == "variational_preferential_gp":
             X_baseline = model.train_inputs[0]
         acquisition_function = qNoisyExpectedImprovement(

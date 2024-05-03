@@ -26,7 +26,7 @@ class PreferentialSoftmaxLikelihood(Likelihood):
         self.num_alternatives = num_alternatives
         self.noise = torch.tensor(1e-4)  # This is only used to draw RFFs-based
         # samples. We set it close to zero because we want noise-free samples
-        self.sampler = SobolQMCNormalSampler(sample_shape=512)  # This allows for
+        self.sampler = SobolQMCNormalSampler(sample_shape=torch.size([512]))  # This allows for
         # SAA-based optimization of the ELBO
 
     def _draw_likelihood_samples(
